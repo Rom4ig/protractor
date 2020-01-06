@@ -1,6 +1,5 @@
 
 const StartPage = require('./Pages/startPage')
-const EC = protractor.ExpectedConditions;
 beforeAll(async function () {
   await StartPage.clear();
   browser.waitForAngularEnabled(false);
