@@ -1,0 +1,16 @@
+{
+  "name": "protractorTask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "protractor conf.js"
+  },
+  "author": "Rom4ik",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "log4js": "^6.1.0",
+    "protractor": "^5.4.2"
+  }
+}
