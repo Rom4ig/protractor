@@ -1,5 +1,10 @@
-# protractor
-## iTechArt 
+# protractor iTechArt 
+## About
+### 6 test cases
+#### Currency, login, restore, weather, job, producrts
+### 17 specs
+### site: tut.by
+### author: me
 ## requirements
 ### U must have JDK
 ### Default browser - chrome
