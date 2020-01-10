@@ -5,7 +5,6 @@ describe('Products test', function () {
 
     beforeAll(async function () {
         logger.info('Start Products test');
-        browser.waitForAngularEnabled(false);
         ProductsPage.open('https://www.tut.by/');
     });
 

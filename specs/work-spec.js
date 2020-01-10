@@ -4,7 +4,6 @@ const logger = require('../conf').logger;
 describe('Work test', function () {
     beforeAll(async function () {
         logger.info('Start work test');
-        browser.waitForAngularEnabled(false);
         WorkPage.open('https://www.tut.by/');
     });
 

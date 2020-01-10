@@ -6,7 +6,6 @@ describe('Dollar test', function () {
     beforeAll(async function () {
         await DollarPage.clear();
         logger.info('Start dollar test');
-        browser.waitForAngularEnabled(false);
         DollarPage.open('https://www.tut.by/');
     });
 

@@ -4,7 +4,6 @@ const logger = require('../conf').logger;
 describe('Weather test', function () {
     beforeAll(async function () {
         logger.info('Start weather test');
-        browser.waitForAngularEnabled(false);
         WeatherPage.open('https://www.tut.by/');
     });
 

@@ -5,7 +5,6 @@ describe('Restore test', function () {
 
     beforeAll(async function () {
         logger.info('Start restore test');
-        browser.waitForAngularEnabled(false);
         RestorePage.open('https://www.tut.by/');
     });
 
