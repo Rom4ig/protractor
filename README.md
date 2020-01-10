@@ -8,7 +8,7 @@
 ## requirements
 ### U must have JDK
 ### Default browser - chrome
-## instruction
+## [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) instruction
 ### use ==> npm istall ==> to download all packages
 ### go to  ==> node_modules\.bin\ and USE webdriver-manager update|start 
 ### use ==> npm test -- --browser=browserName (chrome is default) in root.
