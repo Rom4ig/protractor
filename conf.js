@@ -1,3 +1,9 @@
+let brow = 'chrome';
+if (process.argv.length > 3) { //Check browser
+  let regex = /--browser=([A-Za-z]+)/;
+  brow = process.argv[3].match(regex)[1];
+}
+
 let addScreenShots = new function () {
     this.specDone = function (result) {        
             browser.takeScreenshot().then(function (png) {
@@ -7,24 +13,6 @@ let addScreenShots = new function () {
             });
     };
 }
-
-exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['specs/*-spec.js'], 
-  capabilities: {
-  'browserName': 'chrome',
-	'chromeOptions': {
-    'args': ['--start-maximized']
-  }},
-  //framework: 'jasmine2',
-  onPrepare: function() {
-    var AllureReporter = require('jasmine-allure-reporter');
-	jasmine.getEnv().addReporter(addScreenShots);
-    jasmine.getEnv().addReporter(new AllureReporter({
-      resultsDir: 'allure-results'
-    }));
-  }
-};
 
 const log4js = require('log4js');
 log4js.configure({
@@ -49,6 +37,31 @@ exports.logger = {
   error: str => loggerDefault.error(str),
   fatal: str => loggerDefault.fatal(str)
 }
+
+exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+  specs: ['specs/*-spec.js'], 
+  capabilities: {
+  'browserName': brow,
+	},
+  //framework: 'jasmine2',
+  onPrepare: function() {
+	browser.waitForAngularEnabled(false);
+	browser.driver.manage().window().maximize();
+    var AllureReporter = require('jasmine-allure-reporter');
+	jasmine.getEnv().addReporter(addScreenShots);
+    jasmine.getEnv().addReporter(new AllureReporter({
+      resultsDir: 'allure-results'
+    }));
+  },
+      beforeLaunch: () => {
+        loggerDefault.info('Protractor tut.by test started');
+    },
+    onComplete: () => {
+        loggerDefault.info('Protractor tut.by test finished');
+    }
+};
+
 /* multiCapabilities: [
     {'browserName': 'chrome',
 	'chromeOptions': {
