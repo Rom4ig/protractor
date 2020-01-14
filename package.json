@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node node_modules/protractor/bin/webdriver-manager update"
+    "postinstall": "node node_modules/protractor/bin/webdriver-manager update",
     "test": "protractor conf.js",
     "posttest": "allure generate allure-results --clean -o allure-report"
   },
