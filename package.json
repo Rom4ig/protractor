@@ -1,11 +1,12 @@
 {
-  "name": "protractorTask",
+  "name": "protractor_task",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node node_modules/protractor/bin/webdriver-manager update"
     "test": "protractor conf.js",
-    "posttest": "allure generate allure-results --clean -o allure-report && allure open"
+    "posttest": "allure generate allure-results --clean -o allure-report"
   },
   "author": "Rom4ik",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "fs": "0.0.1-security",
     "jasmine-allure-reporter": "^1.0.2",
     "log4js": "^6.1.0",
-    "protractor": "^5.4.2"
+    "protractor": "^5.4.2",
+    "yargs": "^15.1.0"
   }
 }

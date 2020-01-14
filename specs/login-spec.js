@@ -1,40 +1,44 @@
 const StartPage = require('../Pages/startPage')
-const logger = require('../conf').logger;
+const logger = require('../logger').logger;
+const Menu = require('../Pages/menuClass');
 
 describe('Tut.by login', function () {
   beforeAll(async function () {
     logger.info('Start login test');
-    StartPage.open('https://www.tut.by/');
+    browser.get(browser.baseUrl);
   });
 
-  it('Disabled button by login', async function () {
-    await StartPage.click(StartPage.LoginButton);
-    await StartPage.enterSomething(StartPage.LoginField);
+  it('Should disabled button by login', async function () {
+    await Menu.clickElement(Menu.LoginButton);
+    text = await StartPage.getRandomText(5);
+    await StartPage.enterTextToElement(StartPage.LoginField, text);
     expect((StartPage.EnterButton).isEnabled()).toBe(false);
   });
 
-  it('Disabled button by password', async function () {
-    await StartPage.clearElem(StartPage.LoginField);
-    await StartPage.enterSomething(StartPage.PasswordField);
+  it('Should disabled button by password', async function () {
+    await StartPage.clearElemValue(StartPage.LoginField);
+    text = await StartPage.getRandomText(5);
+    await StartPage.enterTextToElement(StartPage.PasswordField, text);
     expect((StartPage.EnterButton).isEnabled()).toBe(false);
   });
 
-  it('Fail Autorize', async function () {
-    await StartPage.enterSomething(StartPage.LoginField);
-    await StartPage.click(StartPage.EnterButton);
-    await StartPage.click(StartPage.LoginButton);
-    let error = await StartPage.getMessage(StartPage.ErrorElem);
+  it('Should fail authorize', async function () {
+    text = await StartPage.getRandomText(5);
+    await StartPage.enterTextToElement(StartPage.LoginField, text);
+    await StartPage.clickElement(StartPage.EnterButton);
+    await Menu.clickElement(Menu.LoginButton);
+    error = await StartPage.getElementText(StartPage.ErrorElem);
     expect(error).toEqual('Неверное имя пользователя или пароль');
   });
 
-  it('Success Autorize', async function () {
-    await StartPage.enterSomething(StartPage.PasswordField, 'qwerty228');
-    await StartPage.enterSomething(StartPage.LoginField, 'romses2000@mail.ru');
-    await StartPage.click(StartPage.EnterButton);
-    let name = await StartPage.getMessage(StartPage.Name);
+  it('Should success Authorize', async function () {
+    await StartPage.enterTextToElement(StartPage.PasswordField, 'qwerty228');
+    await StartPage.enterTextToElement(StartPage.LoginField, 'romses2000@mail.ru');
+    await StartPage.clickElement(StartPage.EnterButton);
+    name = await Menu.getElementText(Menu.Name);
     expect(name).toEqual('Роман Грунковский');
-    await StartPage.click(StartPage.LoginButton);
-    await StartPage.click(StartPage.ExitButton);
+    await Menu.clickElement(Menu.LoginButton);
+    await StartPage.clickElement(StartPage.ExitButton);
   });
 
   afterAll(async function () {

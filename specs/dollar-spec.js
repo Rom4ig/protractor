@@ -1,40 +1,43 @@
 const DollarPage = require('../Pages/dollarPage');
-const logger = require('../conf').logger;
+const DollarArchivePage = require('../Pages/dollarArchivePage');
+const logger = require('../logger').logger;
+const Menu = require('../Pages/menuClass');
 
 describe('Dollar test', function () {
     let dollar;
     beforeAll(async function () {
-        await DollarPage.clear();
         logger.info('Start dollar test');
-        DollarPage.open('https://www.tut.by/');
+        browser.get(browser.baseUrl);
     });
 
-    it('Dollar check', async function () {
-        dollar = await DollarPage.getMessage(DollarPage.DollarElement);
+    it('Count of symbols after point.', async function () {
+        dollar = await DollarPage.getElementText(Menu.DollarElement);
         logger.debug(dollar);
         expect(dollar).toContain('$');
-        let count = dollar.split('.').pop().length;
+        count = dollar.split('.').pop().length;
         expect(count).toEqual(4);
     });
 
-    it('Check dollar', async function () {
-        await DollarPage.click(DollarPage.FinansButton);
-        let dollarNBRB = await DollarPage.getMessage(await DollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
+    it('Check dollar equal.  Menu element and page element', async function () {
+        await Menu.navigate('Финансы');
+        dollarNBRB = await DollarPage.getElementText(await DollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
         logger.debug(dollarNBRB);
         dollarNBRB = '$' + dollarNBRB;
-        expect(dollarNBRB).toEqual(dollar);
+        expect(dollarNBRB).toEqual(dollar.slice(1));
     });
 
-    it('Buy and sell', async function () {
-        dollarBuy = await DollarPage.getMessage(await DollarPage.elementByValueAndCurrency('купить', '1 USD'));
-        dollarSell = await DollarPage.getMessage(await DollarPage.elementByValueAndCurrency('продать', '1 USD'));
+    it('Buy must be greater than sell', async function () {
+        dollarBuy = await DollarPage.getElementText(await DollarPage.elementByValueAndCurrency('купить', '1 USD'));
+        dollarSell = await DollarPage.getElementText(await DollarPage.elementByValueAndCurrency('продать', '1 USD'));
         expect(dollarBuy).toBeGreaterThan(dollarSell);
     });
 
-    it('Archive test', async function () {
-        await DollarPage.click(await DollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
-        await DollarPage.startDate(1,12,2019);
-        let dollarNBRBArchive = await DollarPage.getMessage(await DollarPage.elementByBankAndDate('Курс НБРБ', '01.12.2019'));
+    it('Archive of tests. The value of the dollar must be equal to some value', async function () {
+        await DollarPage.clickElement(await DollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
+        startDate = new Date('December 1, 2019');
+        endDate = new Date();
+        await DollarArchivePage.setDate(startDate, endDate);
+        dollarNBRBArchive = await DollarArchivePage.getElementText(await DollarArchivePage.elementByBankAndDate('Курс НБРБ', '01.12.2019'));
         expect(parseFloat(dollarNBRBArchive)).toEqual(2.1086);
     });
 
