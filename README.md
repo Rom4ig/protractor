@@ -11,5 +11,5 @@
 ### use ==> npm install ==> to download all packages
 ### use ==> npm test -- --browser=browserName (chrome is default) in root.
 ## Info
-### Products test work only in fullscreen mode!!!(Browser run in fullscreen mode)
+### Products test work only in fullscreen mode!!!(Browser run in fullscreen mode(default))
 ### You can see all screenshots in allure-results\
