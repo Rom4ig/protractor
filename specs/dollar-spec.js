@@ -32,7 +32,7 @@ describe('Dollar test', function () {
         expect(dollarBuy).toBeGreaterThan(dollarSell);
     });
 
-    it('Archive of tests. The value of the dollar must be equal to some value', async function () {
+    it('Arhive dollar check. The value of the dollar must be equal to some value', async function () {
         await DollarPage.clickElement(await DollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
         startDate = new Date('December 1, 2019');
         endDate = new Date();
