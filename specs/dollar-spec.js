@@ -32,7 +32,7 @@ describe('Dollar test', function () {
         expect(dollarBuy).toBeGreaterThan(dollarSell);
     });
 
-    it('Check archive dollar. The value of the dollar must be equal to 2.1086 value', async function () {
+    it('Checking the dollar archive for the date of December 1, 2019. The value of the dollar must be equal to 2.1086 value', async function () {
         await dollarPage.clickElement(await dollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
         let  startDate = new Date('December 1, 2019');
         let endDate = new Date();
