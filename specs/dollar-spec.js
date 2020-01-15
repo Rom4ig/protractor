@@ -18,7 +18,7 @@ describe('Dollar test', function () {
         expect(count).toEqual(4);
     });
 
-    it('Menu dollar element must be equal with page dollar element', async function () {
+    it('Dollar menu element must be equal with dollar page element', async function () {
         await menu.navigate('Финансы');
         let  dollarNBRB = await dollarPage.getElementText(await dollarPage.elementByValueAndCurrency('нацбанк', '1 USD'));
         logger.debug(dollarNBRB);
