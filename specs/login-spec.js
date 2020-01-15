@@ -8,14 +8,14 @@ describe('Tut.by login', function () {
     browser.get(browser.baseUrl);
   });
 
-  it('When entering the only login, the login button should be disabled.', async function () {
+  it('When entering only login, the login button should be disabled.', async function () {
     await menu.clickElement(menu.LoginButton);
     let text = await startPage.getRandomText(5);
     await startPage.enterTextToElement(startPage.LoginField, text);
     expect((startPage.EnterButton).isEnabled()).toBe(false);
   });
 
-  it('When entering the only password, the login button should be disabled.', async function () {
+  it('When entering only password, the login button should be disabled.', async function () {
     await startPage.clearElemValue(startPage.LoginField);
     let text = await startPage.getRandomText(5);
     await startPage.enterTextToElement(startPage.PasswordField, text);
