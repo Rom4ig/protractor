@@ -14,12 +14,10 @@ class Page {
     }
 
     async getElementText(elem) {
-        let mess;
-        await elem.getText().then((text) => {
-            mess = text;
-            this.logger.trace(`Get message - ${mess}`);
+        return await elem.getText().then((text) => {
+            this.logger.trace(`Get message - ${text}`);
+            return text;
         });
-        return mess;
     }
 
 

@@ -1,7 +1,7 @@
 const argv = require('yargs').argv
 const logger = require('./logger').logger;
 let brow = 'chrome';
-if (argv.length > 3) { //Check browser
+if (argv.browser !== undefined) { //Check browser
   brow = argv.browser;
 }
 

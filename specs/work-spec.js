@@ -1,6 +1,6 @@
-const WorkPage = require('../Pages/workPage');
+const workPage = require('../Pages/workPage');
 const logger = require('../logger').logger;
-const Menu = require('../Pages/menuClass');
+const menu = require('../Pages/menuClass');
 
 describe('Work test', function () {
     beforeAll(async function () {
@@ -8,17 +8,17 @@ describe('Work test', function () {
         browser.get(browser.baseUrl);
     });
 
-    it('Title of page check', async function () {
-        await Menu.navigate('Работа');
-        title = 'Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by'
+    it('Page title should be "Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by"', async function () {
+        await menu.navigate('Работа');
+        let  title = 'Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by'
         expect(await browser.getTitle()).toEqual(title);
     });
 
-    it('The word is present in all search results', async function () {
-        await WorkPage.enterTextToElement(WorkPage.SearhField, 'iTechArt');
-        await WorkPage.clickElement(WorkPage.SubmitButton);
-        array = await WorkPage.getElementText(WorkPage.WorkElements);
-        for (i = 1; i < array.length; i++) {
+    it('The word "itechart" is present in all search results', async function () {
+        await workPage.enterTextToElement(workPage.SearhField, 'iTechArt');
+        await workPage.clickElement(workPage.SubmitButton);
+        let array = await workPage.getElementText(workPage.WorkElements);
+        for (let i = 1; i < array.length; i++) {
             expect(array[i].toLowerCase()).toContain('itechart');
         }
     });

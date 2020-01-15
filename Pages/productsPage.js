@@ -19,7 +19,7 @@ class ProductsPage extends Page {
             let number = array.indexOf(name);
             this.logger.trace(number);
             await this.clickElement((this.CategoryArray).get(number));
-            this.logger.info(`Clicked by link ${linkText}`)
+            this.logger.info(`Clicked by link ${name}`)
         }
         catch {
             await element(by.linkText(name)).click();

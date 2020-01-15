@@ -1,7 +1,7 @@
-const ProductsPage = require('../Pages/productsPage');
-const CatalogPage = require('../Pages/catalogPage');
+const productsPage = require('../Pages/productsPage');
+const catalogPage = require('../Pages/catalogPage');
 const logger = require('../logger').logger;
-const Menu = require('../Pages/menuClass');
+const menu = require('../Pages/menuClass');
 
 describe('Products test', function () {
 
@@ -10,26 +10,26 @@ describe('Products test', function () {
         browser.get(browser.baseUrl);
     });
 
-    it('Must be correct sorting', async function () {
-        await Menu.navigate('Каталог цен');
-        await CatalogPage.clickByCategory('Ноутбуки');
-        await ProductsPage.setSort('Сначала дешевые');
-        priceArray = await ProductsPage.getPrice();
+    it('The price of the previous is less than or equal to the price of the subsequent', async function () {
+        await menu.navigate('Каталог цен');
+        await catalogPage.clickByCategory('Ноутбуки');
+        await productsPage.setSort('Сначала дешевые');
+        let priceArray = await productsPage.getPrice();
         logger.debug(priceArray);
-        for (i = 1; i < priceArray.length; i++) {
+        for (let i = 1; i < priceArray.length; i++) {
             expect(parseFloat((priceArray[i]).replace(',', '.'))).toBeGreaterThanOrEqual(parseFloat((priceArray[i - 1]).replace(',', '.')));
         }
     });
 
-    it('The words are present in all search results', async function () {
-        await ProductsPage.clickElement(ProductsPage.AllManufacturer);
-        await ProductsPage.setManufacturer('ASUS');
-        await ProductsPage.setManufacturer('DELL');
-        await ProductsPage.SubmitButton.submit();
-        laptopsArray = await ProductsPage.getElementText(ProductsPage.LaptopsArray);
+    it('The words "ASUS" and "DELL" are present in all search results', async function () {
+        await productsPage.clickElement(productsPage.AllManufacturer);
+        await productsPage.setManufacturer('ASUS');
+        await productsPage.setManufacturer('DELL');
+        await productsPage.SubmitButton.submit();
+        let laptopsArray = await productsPage.getElementText(productsPage.LaptopsArray);
         laptopsArray.splice(0, 1); //1-ый реклама
-        length = laptopsArray.length;
-        for (item of laptopsArray) {
+        let length = laptopsArray.length;
+        for (let item of laptopsArray) {
             logger.debug(item);
             if (item.includes('ASUS') || item.includes('DELL'))
                 length--;
