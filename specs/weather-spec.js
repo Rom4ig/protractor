@@ -10,7 +10,7 @@ describe('Weather test', function () {
 
     it('Menu weather element must be equal with page weather element', async function () {
         let weather = await menu.getElementText(menu.WeatherElement);
-        let regex = /((\+[1-9]{1,2}|\-[1-9]{1,2}|0)°)/;
+        let regex = /((\+[1-9]{1,2}|-[1-9]{1,2}|0)°)/;
         await menu.clickElement(menu.WeatherElement);
         let weatherpage = await weatherPage.getElementText(weatherPage.WeatherPageElement);
         weatherpage = weatherpage.match(regex)[1];

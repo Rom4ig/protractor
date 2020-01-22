@@ -1,4 +1,4 @@
-const startPage = require('../Pages/startPage')
+const startPage = require('../Pages/startPage');
 const logger = require('../logger').logger;
 const menu = require('../Pages/menuClass');
 

@@ -1,4 +1,4 @@
-const argv = require('yargs').argv
+const argv = require('yargs').argv;
 const logger = require('./logger').logger;
 let brow = 'chrome';
 if (argv.browser !== undefined) { //Check browser
@@ -13,7 +13,7 @@ let addScreenShots = new function () {
                 }, 'image/png')();
             });
     };
-}
+};
 
 exports.config = {
   framework: 'jasmine2',
