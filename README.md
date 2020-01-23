@@ -6,7 +6,6 @@
 ### site: tut.by
 ### author: me
 ## requirements
-### You must have JDK
 ### Default browser - chrome
 ### use ==> npm install ==> to download all packages
 ### use ==> npm test -- --browser=browserName (chrome is default) in root.
