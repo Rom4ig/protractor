@@ -1,3 +1,5 @@
 /node_modules
 /logs
-debug.log
+*.log
+/allure-report
+/allure-results
