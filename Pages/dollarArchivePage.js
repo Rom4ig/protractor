@@ -1,35 +1,45 @@
-const Page = require('./page');
+const Element = require('../element');
 
-class DollarArchivePage extends Page {
-    CalendarFromElement = element(by.css('[id="calendar_from"]'));
-    CalendarToElement = element(by.css('[id="calendar_to"]'));
-    SubmitButton = element(by.css('[class="button small m-blue"]'));
-    async elementSelectByTypeAndRange(range, type) {
-        return element(by.xpath(`//div[@id="calendar_${range}_popup"]//div/span/select[@data-calendar="${type}"]`))
-    }
+class DollarArchivePage  {
+  get calendarFromElement() {
+    return new Element('#calendar_from')
+  }
 
-    async elementOptionByTypeAndValue(range, type, value) {
-        return element(by.xpath(`//div[@id="calendar_${range}_popup"]//div/span/select[@data-calendar="${type}"]/option[@value="${value}"]`))
-    }
-    
-    async elementByBankAndDate(bank, date) {
-        return element(by.xpath(`//td[count(//th[text()="${bank}"]/preceding-sibling::th)+1][..//td="${date}"]`))
-    }
+  get calendarToElement() {
+    return new Element('#calendar_to')
+  }
 
-    async chooseDate(range, day, month, year) {
-        await this.clickElement(await this.elementSelectByTypeAndRange(range, 'y'));
-        await this.clickElement(await this.elementOptionByTypeAndValue(range, 'y', year));
-        await this.clickElement(await this.elementSelectByTypeAndRange(range, 'm'));
-        await this.clickElement(await this.elementOptionByTypeAndValue(range, 'm', month));
-        await this.clickElement(element(by.linkText(`${day}`)));
-    }
+  get submitButton() {
+    return new Element('.button.small.m-blue')
+  }
 
-    async setDate(startDate, endDate) {
-        await this.clickElement(this.CalendarFromElement);
-        await this.chooseDate('from', startDate.getDate(), startDate.getMonth(), startDate.getFullYear());
-        await this.clickElement(this.CalendarToElement);
-        await this.chooseDate('to', endDate.getDate(), endDate.getMonth(), endDate.getFullYear());
-        await this.clickElement(this.SubmitButton);
-    }
+  elementSelectByTypeAndRange(range, type) {
+    return new Element(`//div[@id="calendar_${range}_popup"]//div/span/select[@data-calendar="${type}"]`);
+  }
+
+  elementOptionByTypeAndValue(range, type, value) {
+    return new Element(`//div[@id="calendar_${range}_popup"]//div/span/select[@data-calendar="${type}"]/option[@value="${value}"]`);
+  }
+
+  elementByBankAndDate(bank, date) {
+    return new Element(`//td[count(//th[text()="${bank}"]/preceding-sibling::th)+1][..//td="${date}"]`);
+  }
+
+  chooseDate(range, day, month, year) {
+    this.elementSelectByTypeAndRange(range, 'y').waitAndClick();
+    this.elementOptionByTypeAndValue(range, 'y', year).waitAndClick();
+    this.elementSelectByTypeAndRange(range, 'm').waitAndClick();
+    this.elementOptionByTypeAndValue(range, 'm', month).waitAndClick();
+    new Element(`=${day}`).waitAndClick();
+  }
+
+  setDate(startDate, endDate) {
+    this.calendarFromElement.waitAndClick();
+    this.chooseDate('from', startDate.getDate(), startDate.getMonth(), startDate.getFullYear());
+    this.calendarToElement.waitAndClick();
+    this.chooseDate('to', endDate.getDate(), endDate.getMonth(), endDate.getFullYear());
+    this.submitButton.waitAndClick();
+  }
 }
+
 module.exports = new DollarArchivePage();

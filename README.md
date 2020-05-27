@@ -1,4 +1,4 @@
-# protractor iTechArt 
+# wdio iTechArt 
 ## About
 ### 6 test cases
 #### Currency, login, restore, weather, job, products

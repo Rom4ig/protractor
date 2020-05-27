@@ -3,42 +3,44 @@ const catalogPage = require('../Pages/catalogPage');
 const logger = require('../logger').logger;
 const menu = require('../Pages/menuClass');
 
-describe('Products test', function () {
+describe('Products test', () => {
 
-    beforeAll(async function () {
-        logger.info('Start Products test');
-        browser.get(browser.baseUrl);
-    });
+  beforeAll(() => {
+    logger.info('Start Products test');
+  });
 
-    it('The price of the previous is less than or equal to the price of the subsequent', async function () {
-        await menu.navigate('Каталог цен');
-        await catalogPage.clickByCategory('Ноутбуки');
-        await productsPage.setSort('Сначала дешевые');
-        let priceArray = await productsPage.getPrice();
-        logger.debug(priceArray);
-        for (let i = 1; i < priceArray.length; i++) {
-            expect(parseFloat((priceArray[i]).replace(',', '.'))).toBeGreaterThanOrEqual(parseFloat((priceArray[i - 1]).replace(',', '.')));
-        }
-    });
+  it('The price of the previous is less than or equal to the price of the subsequent', () => {
+    menu.navigate('Каталог цен');
+    catalogPage.category('Ноутбуки').waitAndClick();
+    productsPage.sort('Сначала дешевые').waitAndClick();
+    productsPage.sort('Сначала дешевые').waitForElementVisible();
+    let priceArray = productsPage.getPrice();
+    logger.debug(priceArray);
+    for (let i = 1; i < priceArray.length; i++) {
+      expect(parseFloat((priceArray[i]).replace(',', '.'))).toBeGreaterThanOrEqual(parseFloat((priceArray[i - 1]).replace(',', '.')));
+    }
+  });
 
-    it('The words "ASUS" and "DELL" are present in all search results', async function () {
-        await productsPage.clickElement(productsPage.AllManufacturer);
-        await productsPage.setManufacturer('ASUS');
-        await productsPage.setManufacturer('DELL');
-        await productsPage.SubmitButton.submit();
-        let laptopsArray = await productsPage.getElementText(productsPage.LaptopsArray);
-        laptopsArray.splice(0, 1); //1-ый реклама
-        let length = laptopsArray.length;
-        for (let item of laptopsArray) {
-            logger.debug(item);
-            if (item.includes('ASUS') || item.includes('DELL'))
-                length--;
-        }
-        expect(length).toEqual(0);
-    });
+  it('The words "ASUS" and "DELL" are present in all search results', () => {
+    productsPage.allManufacturer.waitAndClick();
+    productsPage.manufacturer('ASUS').waitAndClick();
+    productsPage.manufacturer('DELL').waitAndClick();
+    productsPage.convertLink.waitAndClick();
+    productsPage.submitButton.waitAndClick();
+    productsPage.submitButton.waitForElementVisible();
+    let laptopsArray = productsPage.laptopsArray.getTextOfArray();
+    laptopsArray.splice(0, 1); //1-ый реклама
+    let length = laptopsArray.length;
+    for (let item of laptopsArray) {
+      logger.debug(item);
+      if (item.includes('ASUS') || item.includes('DELL'))
+        length--;
+    }
+    expect(length).toEqual(0);
+  });
 
-    afterAll(async function () {
-        logger.info('End Products test');
-    });
+  afterAll(() => {
+    logger.info('End Products test');
+  });
 
-})
+});

@@ -1,15 +1,35 @@
-const Page = require('./page');
+const Element = require('../element');
 
-class RestorePage extends Page {
-    RestoreField = element(by.css('[id="field-email-login"]'));
-    CheckButton = element(by.css('[id="recovery-check"]'));
-    ErrorMessage = element(by.css('[id="field-email-login-notice"]'));
-    EmailRecoveryButton = element(by.css('[id="email_recovery"]'));
-    ReservEmailField = element(by.css('[id="field-reservemail"]'));
-    ErrorFormatMail = element(by.css('[id="field-reservemail-notice"]'));
-    EmailReservButton = element(by.css('[id="field-reservemail-button"]'));
-    
-    
+class RestorePage  {
+  get restoreField() {
+    return new Element('#field-email-login')
+  }
+
+  get checkButton() {
+    return new Element('#recovery-check')
+  }
+
+  get errorMessage() {
+    return new Element('#field-email-login-notice')
+  }
+
+  get emailRecoveryButton() {
+    return new Element('#email_recovery')
+  }
+
+  get reservEmailField() {
+    return new Element('#field-reservemail')
+  }
+
+  get errorFormatMail() {
+    return new Element('#field-reservemail-notice')
+  }
+
+  get emailReservButton() {
+    return new Element('#field-reservemail-button')
+  }
+
+
 }
 
 module.exports = new RestorePage();

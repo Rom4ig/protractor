@@ -1,12 +1,17 @@
-const Page = require('./page');
+const Element = require('../element');
 
-class WeatherPage extends Page {
-    WeatherPageElement = element(by.css('[class="fcurrent-top"]'));
-    TownElement = element(by.css('[class="dotted"]'));
+class WeatherPage  {
+  get weatherPageElement() {
+    return new Element('.fcurrent-top');
+  }
 
-    async selectTown(town) {
-        await this.clickElement(element(by.linkText(town)));
-    }
+  get townSelector() {
+    return new Element('.dotted');
+  }
+
+  town(town) {
+      return new Element(`=${town}`);
+  }
 }
 
 module.exports = new WeatherPage();

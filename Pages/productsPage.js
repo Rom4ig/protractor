@@ -1,46 +1,45 @@
-const Page = require('./page');
+const Element = require('../element');
 const regex = /([0-9]+,[0-9]+) р./;
 
-class ProductsPage extends Page {
-    
-    SelectSort = element(by.css('[class="sort-select"]'));
-    TagElements = element.all(by.tagName('option'));
-    PriceBlock = element.all(by.css('[class="prices"]'));
-    AllManufacturer = element(by.linkText('Все производители'));
-    SubmitButton = element(by.css('[id="filters_form"]'));
-    LaptopsArray = element.all(by.css('[class="head"]'));
+class ProductsPage  {
 
-    async setSort(name) {
-        this.logger.trace(`Set sort`);
-        try {
-            await this.clickElement(this.SelectSort);
-            let array = (await this.getElementText(this.TagElements));
-            this.logger.trace(`type - ${typeof (array)}, value - ${array}`);
-            let number = array.indexOf(name);
-            this.logger.trace(number);
-            await this.clickElement((this.CategoryArray).get(number));
-            this.logger.info(`Clicked by link ${name}`)
-        }
-        catch {
-            await element(by.linkText(name)).click();
-        }
-    }
+  get convertLink() {
+    return new Element('.convert_link');
+  }
+  get priceBlock() {
+    return new Element('.prices')
+  }
 
-    async getPrice() {
-        let arrayBase = (await this.getElementText(this.PriceBlock));
-        let array = [];
-        arrayBase.splice(0, 1); //1-ый реклама
-        this.logger.trace(`type - ${typeof (arrayBase)}, value - ${arrayBase}`);
-        for (let item of arrayBase) {
-            item = item.match(regex)[1];
-            array.push(item);
-        }
-        return array;
-    }
+  get allManufacturer() {
+    return new Element('=Все производители')
+  }
 
-    async setManufacturer(name) {
-        await element(by.xpath(`//label[text()[contains(.,'${name}')]]`)).click();
+  get submitButton() {
+    return new Element('[value="Подобрать"]')
+  }
+
+  get laptopsArray() {
+    return new Element('.head')
+  }
+
+  sort(name) {
+    return new Element(`=${name}`)
+  }
+
+  getPrice() {
+    let array = [];
+    let arrayBase = this.priceBlock.getTextOfArray();
+    arrayBase.splice(0, 1); //1-ый реклама
+    for (let item of arrayBase) {
+      item = item.match(regex)[1];
+      array.push(item);
     }
+    return array;
+  }
+
+  manufacturer(name) {
+   return new Element(`//label[text()[contains(.,'${name}')]]`);
+  }
 }
 
 module.exports = new ProductsPage();

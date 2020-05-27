@@ -1,16 +1,30 @@
-const Page = require('./page');
-class Menu extends Page {
-    WeatherElement = element(by.css('[class="weather"]'));
-    DollarElement = element(by.css('[class="sub-inf"]'));
-    LoginButton = element(by.css('[data-target-popup="authorize-form"]'));
-    Name = element(by.css('[class="uname"]'));
+const Element = require('../element');
 
-    async elementByLinkText(text) {
-        return element(by.linkText(text));
-    }
-    async navigate(text) {
-        let elem = await this.elementByLinkText(text);
-        await elem.click();
-    }
+class Menu  {
+  get weatherElement() {
+    return new Element('.weather');
+  }
+
+  get dollarElement() {
+    return new Element('.sub-inf')
+  }
+
+  get loginButton() {
+    return new Element('[data-target-popup="authorize-form"]')
+  }
+
+  get name(){
+      return new Element('.uname');
+  }
+
+  elementByLinkText(text) {
+    return new Element(`=${text}`);
+  }
+
+  navigate(text) {
+    let elem = this.elementByLinkText(text);
+    elem.waitAndClick();
+  }
 }
+
 module.exports = new Menu();

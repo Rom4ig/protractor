@@ -1,9 +1,17 @@
-const Page = require('./page');
+const Element = require('../element');
 
-class WorkPage extends Page {
-    SearchField = element(by.css('[data-qa="search-input"]'));
-    SubmitButton = element(by.css('[class="supernova-search-submit-text"]'));
-    WorkElements = element.all(by.xpath('//div[@data-qa="vacancy-serp__vacancy" or @data-qa="vacancy-serp__vacancy vacancy-serp__vacancy_premium"]'));
+class WorkPage  {
+  get searchField() {
+    return new Element('[data-qa="search-input"]');
+  }
+
+  get submitButton() {
+    return new Element('.supernova-search-submit-text');
+  }
+
+  get workElements() {
+    return new Element('//div[@data-qa="vacancy-serp__vacancy" or @data-qa="vacancy-serp__vacancy vacancy-serp__vacancy_premium"]');
+  }
 }
 
 module.exports = new WorkPage();

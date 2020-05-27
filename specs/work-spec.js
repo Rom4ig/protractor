@@ -2,29 +2,29 @@ const workPage = require('../Pages/workPage');
 const logger = require('../logger').logger;
 const menu = require('../Pages/menuClass');
 
-describe('Work test', function () {
-    beforeAll(async function () {
-        logger.info('Start work test');
-        browser.get(browser.baseUrl);
-    });
+describe('Work test', () => {
+  beforeAll(() => {
+    logger.info('Start work test');
+  });
 
-    it('Page title should be "Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by"', async function () {
-        await menu.navigate('Работа');
-        let  title = 'Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by'
-        expect(await browser.getTitle()).toEqual(title);
-    });
+  it('Page title should be "Работа в Минске, поиск персонала и публикация вакансий - jobs.tut.by"', () => {
+    menu.navigate('Работа');
+    let title = 'Работа в Витебске, свежие вакансии - vitebsk.jobs.tut.by';
+    expect(browser.getTitle()).toEqual(title);
+  });
 
-    it('The word "itechart" is present in all search results', async function () {
-        await workPage.enterTextToElement(workPage.SearhField, 'iTechArt');
-        await workPage.clickElement(workPage.SubmitButton);
-        let array = await workPage.getElementText(workPage.WorkElements);
-        for (let i = 1; i < array.length; i++) {
-            expect(array[i].toLowerCase()).toContain('itechart');
-        }
-    });
+  it('The word "itechart" is present in all search results', () => {
+    workPage.searchField.setValue('iTechArt');
+    workPage.submitButton.waitAndClick();
+    workPage.submitButton.waitForElementVisible();
+    let array = workPage.workElements.getTextOfArray();
+    for (let i = 1; i < array.length; i++) {
+      expect(array[i].toLowerCase()).toContain('itechart');
+    }
+  });
 
-    afterAll(async function () {
-        logger.info('End work test');
-    });
+  afterAll(() => {
+    logger.info('End work test');
+  });
 
-})
+});
