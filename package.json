@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio wdio.conf.js",
-    "posttest": "allure generate allure-results --clean -o allure-report"
+    "posttest": "allure generate logs/allure-results --clean -o logs/allure-report"
   },
   "author": "Rom4ik",
   "license": "ISC",

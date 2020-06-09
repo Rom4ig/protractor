@@ -2,7 +2,7 @@ const Element = require('../element');
 
 class WeatherPage  {
   get weatherPageElement() {
-    return new Element('.fcurrent-top');
+    return new Element('.temp-i');
   }
 
   get townSelector() {

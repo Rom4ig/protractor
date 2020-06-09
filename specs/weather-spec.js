@@ -9,20 +9,18 @@ describe('Weather test', () => {
 
   it('Menu weather element must be equal with page weather element', () => {
     let weather = menu.weatherElement.getText();
-    let regex = /(([+|-][1-9]{1,2}|0)°)/;
-
     menu.weatherElement.waitAndClick();
+
+    weatherPage.townSelector.waitAndClick();
+    let town = 'Полоцк';
+    weatherPage.town(town).waitAndClick();
     let weatherpage = weatherPage.weatherPageElement.getText();
-    weatherpage = weatherpage.match(regex)[1];
     expect(weatherpage).toEqual(weather);
   });
 
-  it('Town after selecting on the weather page - "Лепеле"', () => {
-   weatherPage.townSelector.waitAndClick();
-    let town = 'Лепель';
-    weatherPage.town(town).waitAndClick();
+  it('Town after selecting on the weather page - "Полоцке"', () => {
     let currentTown = weatherPage.townSelector.getText();
-    expect(currentTown).toEqual('Лепеле');
+    expect(currentTown).toEqual('Полоцке');
   });
 
   afterAll(() => {
