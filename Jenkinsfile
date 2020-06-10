@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        bat 'npm -г'
+        bat 'npm i'
       }
     }
      stage('Run test') {
