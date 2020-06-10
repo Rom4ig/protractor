@@ -4,10 +4,15 @@ pipeline {
   tools {nodejs "node"}
 
   stages {
-    stage('Example') {
+    stage('Install packages') {
       steps {
-        bat 'npm --version'
+        bat 'npm -г'
       }
     }
+     stage('Run test') {
+          steps {
+            bat 'npm test'
+          }
+        }
   }
 }
