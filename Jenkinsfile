@@ -6,13 +6,13 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        bat 'npm i'
+        bat 'npm install'
       }
     }
-     stage('Run test') {
-          steps {
-            bat 'npm test'
-          }
-        }
+    stage('Test') {
+      steps {
+        bat 'npm test'
+      }
+    }
   }
 }
