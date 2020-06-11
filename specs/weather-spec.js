@@ -10,15 +10,15 @@ describe('Weather test', () => {
   it('Menu weather element must be equal with page weather element', () => {
     let weather = menu.weatherElement.getText();
     menu.weatherElement.waitAndClick();
-
-    weatherPage.townSelector.waitAndClick();
-    let town = 'Полоцк';
-    weatherPage.town(town).waitAndClick();
     let weatherpage = weatherPage.weatherPageElement.getText();
+
     expect(weatherpage).toEqual(weather);
   });
 
   it('Town after selecting on the weather page - "Полоцке"', () => {
+    weatherPage.townSelector.waitAndClick();
+    let town = 'Полоцк';
+    weatherPage.town(town).waitAndClick();
     let currentTown = weatherPage.townSelector.getText();
     expect(currentTown).toEqual('Полоцке');
   });

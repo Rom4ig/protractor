@@ -9,7 +9,7 @@ describe('Work test', () => {
 
   it('Page title should be "Работа в Новополоцке, свежие вакансии - novopolotsk.jobs.tut.by"', () => {
     menu.navigate('Работа');
-    let title = 'Работа в Новополоцке, свежие вакансии - novopolotsk.jobs.tut.by';
+    let title = 'Работа в Минске, свежие вакансии - jobs.tut.by';
     expect(browser.getTitle()).toEqual(title);
   });
 
