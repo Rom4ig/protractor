@@ -1,18 +1,10 @@
 pipeline {
-  agent any
-
-  tools {docker "docker"}
-
-  stages {
-    stage('docker') {
-      steps {
-        sh 'docker build -t test .'
-      }
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
-    stage('Test') {
-      steps {
-        sg 'docker run test'
-      }
-    }
-  }
 }
