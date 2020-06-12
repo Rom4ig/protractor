@@ -1,12 +1,18 @@
 pipeline {
-    agent {
-        dockerfile true //{ image 'node:12' }
+  agent any
+
+  tools {nodejs "node"}
+
+  stages {
+    stage('Install packages') {
+      steps {
+        sh 'docker build -t test .'
+      }
     }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
+    stage('Test') {
+      steps {
+        sg 'docker run test'
+      }
     }
+  }
 }
