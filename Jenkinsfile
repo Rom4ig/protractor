@@ -1,10 +1,15 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'node --version'
+                sh 'docker build -t test .'
             }
         }
+                stage('Run') {
+                    steps {
+                        sh 'docker run  -v $(pwd)/docker/:/usr/src/app/logs test'
+                    }
+                }
     }
 }
