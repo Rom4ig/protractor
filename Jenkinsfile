@@ -1,10 +1,10 @@
 pipeline {
   agent any
 
-  tools {nodejs "node"}
+  //tools {nodejs "node"}
 
   stages {
-    stage('Install packages') {
+    stage('docker') {
       steps {
         sh 'docker build -t test .'
       }
