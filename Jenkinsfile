@@ -1,18 +1,12 @@
 pipeline {
-  agent any
-
-  tools {nodejs "node"}
-
-  stages {
-    stage('Install packages') {
-      steps {
-        sh 'npm install'
-      }
+    agent {
+        docker { image 'node:12' }
     }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
-  }
 }
