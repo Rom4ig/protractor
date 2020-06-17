@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "wdio wdio.conf.js",
-    "posttest": "allure generate logs/allure-results --clean -o logs/allure-report"
+    "test": "wdio wdio.conf.js"
   },
   "author": "Rom4ik",
   "license": "ISC",
