@@ -14,7 +14,7 @@ pipeline {
     }
                     post {
                     always {
-                    sh 'allure generate logs/allure-results --clean -o logs/allure-report'
+                    allure ([includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'logs/allure-results']]])
                     }
                     }
 }
