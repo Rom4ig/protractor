@@ -14,7 +14,11 @@ pipeline {
     }
                     post {
                     always {
-                    allure ([includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'logs/allure-results']]])
+                    allure ([includeProperties: false,
+                     jdk: '',
+                      reportBuildPolicy: 'ALWAYS',
+                       results: [[path: 'docker/allure-results']]
+                       ])
                     }
                     }
 }
