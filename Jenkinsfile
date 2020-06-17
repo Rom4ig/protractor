@@ -11,10 +11,10 @@ pipeline {
                         sh 'docker run  -v $(pwd)/docker/:/usr/src/app/logs test'
                     }
                 }
-                stage('Allure'){
-                steps{
-                sh 'allure generate logs/allure-results --clean -o logs/allure-report'
-                }
-                }
     }
+                    post {
+                    always {
+                    sh 'allure generate logs/allure-results --clean -o logs/allure-report'
+                    }
+                    }
 }
