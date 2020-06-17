@@ -8,7 +8,8 @@ pipeline {
         }
                 stage('Run') {
                     steps {
-                        sh 'docker run  -v $(pwd)/docker/:/usr/src/app/logs test'
+                        sh 'docker run  --rm -v $(pwd)/docker/:/usr/src/app/logs test'
+                        sh 'docker rmi test'
                     }
                 }
     }
