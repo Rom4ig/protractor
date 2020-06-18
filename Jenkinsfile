@@ -20,6 +20,5 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'docker/allure-results']]
                        ])
-                    }
-                    }
+                    }}
 }
