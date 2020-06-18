@@ -21,4 +21,5 @@ pipeline {
                         results: [[path: 'docker/allure-results']]
                        ])
                     }
+                    }
 }
