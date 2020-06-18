@@ -7,7 +7,7 @@ describe('Work test', () => {
     logger.info('Start work test');
   });
 
-  it('Page title should be "Работа в Новополоцке, свежие вакансии - novopolotsk.jobs.tut.by"', () => {
+  it('Page title should be "Работа в Минске, свежие вакансии - jobs.tut.by"', () => {
     menu.navigate('Работа');
     let title = 'Работа в Минске, свежие вакансии - jobs.tut.by';
     expect(browser.getTitle()).toEqual(title);

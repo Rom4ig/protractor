@@ -9,17 +9,16 @@ pipeline {
                 stage('Run') {
                     steps {
                         sh 'docker run  --rm -v $(pwd)/docker/:/usr/src/app/logs test'
-                        sh 'docker rmi test'
                     }
                 }
     }
-                    post {
-                    always {
-                    allure ([includeProperties: false,
-                     jdk: '',
-                      reportBuildPolicy: 'ALWAYS',
-                       results: [[path: 'docker/allure-results']]
+                    post { always {
+                    sh 'docker rmi test'
+                    allure ([
+                        includeProperties: false,
+                        jdk: '',
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'docker/allure-results']]
                        ])
-                    }
                     }
 }
