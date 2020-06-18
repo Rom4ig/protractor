@@ -33,7 +33,7 @@ describe('Tut.by login', () => {
   });
 
   it('When set valid credentials, should be success sign in.', () => {
-    startPage.passwordField.setValue('qwerty22'); //228
+    startPage.passwordField.setValue('qwerty228');
     startPage.loginField.setValue('romses2000@mail.ru');
     startPage.enterButton.waitAndClick();
     let name = menu.name.getText();
