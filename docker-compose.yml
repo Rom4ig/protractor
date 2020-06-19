@@ -1,8 +1,0 @@
-version: "2"
-services:
-  sut:
-    build: .
-    command: npm test
-    volumes:
-    - ./docker:/usr/src/app/logs
-
