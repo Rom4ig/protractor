@@ -3,12 +3,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker-compose up'
+                sh 'docker build -t test .'
             }
         }
-        }
+                stage('Run') {
+                    steps {
+                        sh 'docker run  --rm -v $(pwd)/docker/:/usr/src/app/logs test'
+                    }
+                }
+    }
                     post { always {
-                    sh 'docker-compose down'
+                    sh 'docker rmi test'
                     allure ([
                         includeProperties: false,
                         jdk: '',
