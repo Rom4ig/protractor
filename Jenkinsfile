@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker-compose up'
+                sh 'docker-compose up --no-start'
+                sh 'docker-compose run sut'
             }
         }}
          post { always {
