@@ -7,7 +7,7 @@ pipeline {
             }
         }}
          post { always {
-            sh 'docker-compose down'
+            sh 'docker-compose down --rmi all'
             allure ([
                includeProperties: false,
                jdk: '',
