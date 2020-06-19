@@ -6,6 +6,7 @@ pipeline {
                 sh 'docker-compose up'
             }
         }
+        }
                     post { always {
                     sh 'docker-compose down'
                     allure ([
