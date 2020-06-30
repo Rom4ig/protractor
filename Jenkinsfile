@@ -8,7 +8,8 @@ pipeline {
         }
                 stage('Run') {
                     steps {
-                        sh 'docker run  --rm -v $(pwd)/docker/:/usr/src/app/logs test'
+                        sh 'docker run -e USER="Роман Грунковский" -e LOGIN="romses2000@mail.ru"
+                        -e PASSWORD="qwerty228" --rm -v $(pwd)/docker/:/usr/src/app/logs test'
                     }
                 }
     }
