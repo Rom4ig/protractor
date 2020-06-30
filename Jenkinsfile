@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                    sh 'docker-compose up --exit-code-from wdio'
-                //sh 'docker-compose up --no-start'
-                //sh 'docker-compose run wdio'
+                 //sh 'docker-compose up --no-start'
+                 //sh 'docker-compose run wdio'
             }
         }}
          post { always {

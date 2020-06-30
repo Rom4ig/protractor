@@ -1,8 +1,10 @@
 #!/bin/bash
-#set -e
 
-if [ "$3" = 'some' ]; then
-    exec npm test --spec ./specs/login-spec.js
+if [ "$1" = 'regression' ]; then
+    exec npm test -- --spec ./specs/regression/*
+fi
+if [ "$1" = 'smoke' ]; then
+    exec npm test -- --spec ./specs/smoke/*
 fi
 
 exec "$@"

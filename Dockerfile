@@ -8,7 +8,4 @@ RUN npm install
 
 COPY . .
 
-
-#RUN ln -s /usr/src/app/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["npm", "test", "some"]
