@@ -33,11 +33,14 @@ describe('Tut.by login', () => {
   });
 
   it('When set valid credentials, should be success sign in.', () => {
-    startPage.passwordField.setValue('qwerty228');
-    startPage.loginField.setValue('romses2000@mail.ru');
+    const login = process.env.LOGIN || 'romses2000@mail.ru';
+    const password = process.env.PASSWORD || 'qwerty228';
+    const user = process.env.PASSWORD ||'Роман Грунковский';
+    startPage.passwordField.setValue(password);
+    startPage.loginField.setValue(login);
     startPage.enterButton.waitAndClick();
     let name = menu.name.getText();
-    expect(name).toEqual('Роман Грунковский');
+    expect(name).toEqual(user);
     menu.loginButton.waitAndClick();
     startPage.exitButton.waitAndClick();
   });
