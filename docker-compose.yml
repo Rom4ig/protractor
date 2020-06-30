@@ -1,8 +1,12 @@
 version: "2"
 services:
   wdio:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: npm test
     volumes:
     - ./docker:/usr/src/app/logs
+    env_file:
+      - credentials.env
 

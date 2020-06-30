@@ -35,7 +35,7 @@ describe('Tut.by login', () => {
   it('When set valid credentials, should be success sign in.', () => {
     const login = process.env.LOGIN || 'romses2000@mail.ru';
     const password = process.env.PASSWORD || 'qwerty228';
-    const user = process.env.PASSWORD ||'Роман Грунковский';
+    const user = process.env.USER ||'Роман Грунковский';
     startPage.passwordField.setValue(password);
     startPage.loginField.setValue(login);
     startPage.enterButton.waitAndClick();

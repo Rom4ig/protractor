@@ -3,9 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                   sh 'docker-compose up --exit-code-from wdio'
-                 //sh 'docker-compose up --no-start'
-                 //sh 'docker-compose run wdio'
+                 //for fail tests
+                 //sh 'docker-compose up --exit-code-from wdio'
+                 sh 'docker-compose up --no-start'
+                 sh 'docker-compose run  wdio'
+                 //with env
+                 //sh 'docker-compose run -e USER="Роман Грунковский" -e LOGIN="romses2000@mail.ru" -e PASSWORD="qwerty228" wdio'
             }
         }}
          post { always {
