@@ -15,7 +15,7 @@
     "chance": "^1.1.6",
     "fs": "0.0.1-security",
     "jasmine-allure-reporter": "^1.0.2",
-    "log4js": "^6.1.0",
+    "log4js": "^6.4.0",
     "yargs": "^15.1.0"
   },
   "engines": {
